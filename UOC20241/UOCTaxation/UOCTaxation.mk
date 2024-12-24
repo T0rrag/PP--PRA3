@@ -6,15 +6,15 @@
 ProjectName            :=UOCTaxation
 ConfigurationName      :=Debug
 WorkspaceConfiguration :=Debug
-WorkspacePath          :=/home/uoc/Desktop/UOC20241
-ProjectPath            :=/home/uoc/Desktop/UOC20241/UOCTaxation
+WorkspacePath          :=/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241
+ProjectPath            :=/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/UOCTaxation
 IntermediateDirectory  :=../build-$(ConfigurationName)
 OutDir                 :=$(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=uoc
-Date                   :=23/12/24
+Date                   :=24/12/24
 CodeLitePath           :=/home/uoc/.codelite
 MakeDirCommand         :=mkdir -p
 LinkerName             :=/usr/bin/g++
@@ -62,7 +62,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/src_rental_incomes.c$(ObjectSuffix) $(IntermediateDirectory)/src_tenant.c$(ObjectSuffix) $(IntermediateDirectory)/src_landlord.c$(ObjectSuffix) $(IntermediateDirectory)/src_date.c$(ObjectSuffix) $(IntermediateDirectory)/src_api.c$(ObjectSuffix) $(IntermediateDirectory)/src_tax_office.c$(ObjectSuffix) $(IntermediateDirectory)/src_csv.c$(ObjectSuffix) $(IntermediateDirectory)/src_taxes.c$(ObjectSuffix) $(IntermediateDirectory)/src_invoice.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/src_tax_office.c$(ObjectSuffix) $(IntermediateDirectory)/src_invoice.c$(ObjectSuffix) $(IntermediateDirectory)/src_date.c$(ObjectSuffix) $(IntermediateDirectory)/src_taxes.c$(ObjectSuffix) $(IntermediateDirectory)/src_rental_incomes.c$(ObjectSuffix) $(IntermediateDirectory)/src_tenant.c$(ObjectSuffix) $(IntermediateDirectory)/src_landlord.c$(ObjectSuffix) $(IntermediateDirectory)/src_api.c$(ObjectSuffix) $(IntermediateDirectory)/src_csv.c$(ObjectSuffix) 
 
 
 
@@ -94,8 +94,40 @@ PreBuild:
 ##
 ## Objects
 ##
+$(IntermediateDirectory)/src_tax_office.c$(ObjectSuffix): src/tax_office.c $(IntermediateDirectory)/src_tax_office.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/UOCTaxation/src/tax_office.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_tax_office.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_tax_office.c$(DependSuffix): src/tax_office.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_tax_office.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_tax_office.c$(DependSuffix) -MM src/tax_office.c
+
+$(IntermediateDirectory)/src_tax_office.c$(PreprocessSuffix): src/tax_office.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_tax_office.c$(PreprocessSuffix) src/tax_office.c
+
+$(IntermediateDirectory)/src_invoice.c$(ObjectSuffix): src/invoice.c $(IntermediateDirectory)/src_invoice.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/UOCTaxation/src/invoice.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_invoice.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_invoice.c$(DependSuffix): src/invoice.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_invoice.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_invoice.c$(DependSuffix) -MM src/invoice.c
+
+$(IntermediateDirectory)/src_invoice.c$(PreprocessSuffix): src/invoice.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_invoice.c$(PreprocessSuffix) src/invoice.c
+
+$(IntermediateDirectory)/src_date.c$(ObjectSuffix): src/date.c $(IntermediateDirectory)/src_date.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/UOCTaxation/src/date.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_date.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_date.c$(DependSuffix): src/date.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_date.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_date.c$(DependSuffix) -MM src/date.c
+
+$(IntermediateDirectory)/src_date.c$(PreprocessSuffix): src/date.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_date.c$(PreprocessSuffix) src/date.c
+
+$(IntermediateDirectory)/src_taxes.c$(ObjectSuffix): src/taxes.c $(IntermediateDirectory)/src_taxes.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/UOCTaxation/src/taxes.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_taxes.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_taxes.c$(DependSuffix): src/taxes.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_taxes.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_taxes.c$(DependSuffix) -MM src/taxes.c
+
+$(IntermediateDirectory)/src_taxes.c$(PreprocessSuffix): src/taxes.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_taxes.c$(PreprocessSuffix) src/taxes.c
+
 $(IntermediateDirectory)/src_rental_incomes.c$(ObjectSuffix): src/rental_incomes.c $(IntermediateDirectory)/src_rental_incomes.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/uoc/Desktop/UOC20241/UOCTaxation/src/rental_incomes.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_rental_incomes.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/UOCTaxation/src/rental_incomes.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_rental_incomes.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/src_rental_incomes.c$(DependSuffix): src/rental_incomes.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_rental_incomes.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_rental_incomes.c$(DependSuffix) -MM src/rental_incomes.c
 
@@ -103,7 +135,7 @@ $(IntermediateDirectory)/src_rental_incomes.c$(PreprocessSuffix): src/rental_inc
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_rental_incomes.c$(PreprocessSuffix) src/rental_incomes.c
 
 $(IntermediateDirectory)/src_tenant.c$(ObjectSuffix): src/tenant.c $(IntermediateDirectory)/src_tenant.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/uoc/Desktop/UOC20241/UOCTaxation/src/tenant.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_tenant.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/UOCTaxation/src/tenant.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_tenant.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/src_tenant.c$(DependSuffix): src/tenant.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_tenant.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_tenant.c$(DependSuffix) -MM src/tenant.c
 
@@ -111,60 +143,28 @@ $(IntermediateDirectory)/src_tenant.c$(PreprocessSuffix): src/tenant.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_tenant.c$(PreprocessSuffix) src/tenant.c
 
 $(IntermediateDirectory)/src_landlord.c$(ObjectSuffix): src/landlord.c $(IntermediateDirectory)/src_landlord.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/uoc/Desktop/UOC20241/UOCTaxation/src/landlord.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_landlord.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/UOCTaxation/src/landlord.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_landlord.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/src_landlord.c$(DependSuffix): src/landlord.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_landlord.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_landlord.c$(DependSuffix) -MM src/landlord.c
 
 $(IntermediateDirectory)/src_landlord.c$(PreprocessSuffix): src/landlord.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_landlord.c$(PreprocessSuffix) src/landlord.c
 
-$(IntermediateDirectory)/src_date.c$(ObjectSuffix): src/date.c $(IntermediateDirectory)/src_date.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/uoc/Desktop/UOC20241/UOCTaxation/src/date.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_date.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/src_date.c$(DependSuffix): src/date.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_date.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_date.c$(DependSuffix) -MM src/date.c
-
-$(IntermediateDirectory)/src_date.c$(PreprocessSuffix): src/date.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_date.c$(PreprocessSuffix) src/date.c
-
 $(IntermediateDirectory)/src_api.c$(ObjectSuffix): src/api.c $(IntermediateDirectory)/src_api.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/uoc/Desktop/UOC20241/UOCTaxation/src/api.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_api.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/UOCTaxation/src/api.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_api.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/src_api.c$(DependSuffix): src/api.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_api.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_api.c$(DependSuffix) -MM src/api.c
 
 $(IntermediateDirectory)/src_api.c$(PreprocessSuffix): src/api.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_api.c$(PreprocessSuffix) src/api.c
 
-$(IntermediateDirectory)/src_tax_office.c$(ObjectSuffix): src/tax_office.c $(IntermediateDirectory)/src_tax_office.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/uoc/Desktop/UOC20241/UOCTaxation/src/tax_office.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_tax_office.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/src_tax_office.c$(DependSuffix): src/tax_office.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_tax_office.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_tax_office.c$(DependSuffix) -MM src/tax_office.c
-
-$(IntermediateDirectory)/src_tax_office.c$(PreprocessSuffix): src/tax_office.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_tax_office.c$(PreprocessSuffix) src/tax_office.c
-
 $(IntermediateDirectory)/src_csv.c$(ObjectSuffix): src/csv.c $(IntermediateDirectory)/src_csv.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/uoc/Desktop/UOC20241/UOCTaxation/src/csv.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_csv.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/UOCTaxation/src/csv.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_csv.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/src_csv.c$(DependSuffix): src/csv.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_csv.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_csv.c$(DependSuffix) -MM src/csv.c
 
 $(IntermediateDirectory)/src_csv.c$(PreprocessSuffix): src/csv.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_csv.c$(PreprocessSuffix) src/csv.c
-
-$(IntermediateDirectory)/src_taxes.c$(ObjectSuffix): src/taxes.c $(IntermediateDirectory)/src_taxes.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/uoc/Desktop/UOC20241/UOCTaxation/src/taxes.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_taxes.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/src_taxes.c$(DependSuffix): src/taxes.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_taxes.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_taxes.c$(DependSuffix) -MM src/taxes.c
-
-$(IntermediateDirectory)/src_taxes.c$(PreprocessSuffix): src/taxes.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_taxes.c$(PreprocessSuffix) src/taxes.c
-
-$(IntermediateDirectory)/src_invoice.c$(ObjectSuffix): src/invoice.c $(IntermediateDirectory)/src_invoice.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/uoc/Desktop/UOC20241/UOCTaxation/src/invoice.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_invoice.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/src_invoice.c$(DependSuffix): src/invoice.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_invoice.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_invoice.c$(DependSuffix) -MM src/invoice.c
-
-$(IntermediateDirectory)/src_invoice.c$(PreprocessSuffix): src/invoice.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_invoice.c$(PreprocessSuffix) src/invoice.c
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

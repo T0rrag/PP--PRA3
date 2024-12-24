@@ -9,8 +9,7 @@
 //////////////////////////////////
 
 // Initialize the properties
-void properties_init(tProperties* data)
-{
+void properties_init(tProperties* data) {   
     /////////////
     // Set the initial number of elements to zero.
     data->count = 0;
@@ -18,8 +17,7 @@ void properties_init(tProperties* data)
 }
 
 // Get the number of properties
-int properties_len(tLandlord data)
-{
+int properties_len(tLandlord data) {
     //////////////
     // Return the number of elements
     return data.properties.count;
@@ -27,18 +25,16 @@ int properties_len(tLandlord data)
 }
 
 // Initialize the landlords
-void landlords_init(tLandlords* data)
-{
+void landlords_init(tLandlords* data) {   
     /////////////
     // Set the initial number of elements to zero.
     data->count = 0;
-    data->elems = NULL;
+	data->elems = NULL;
     /////////////
 }
 
 // Get the number of landlords
-int landlords_len(tLandlords data)
-{
+int landlords_len(tLandlords data) {   
     //////////////
     // Return the number of elements
     return data.count;
@@ -46,140 +42,140 @@ int landlords_len(tLandlords data)
 }
 
 // Get the number of properties of all landlords
-int landlords_propertiesCount(tLandlords data)
-{
+int landlords_propertiesCount(tLandlords data) {
     int i;
     int count = 0;
-
+    
     // Iterate all landlords
-    for(i = 0; i < data.count; i++) {
+    for (i = 0; i < data.count; i++) {
         count += properties_len(data.elems[i]);
     }
-
+    
     return count;
 }
 
+
 ////////////////////////////////////////
-void landlords_process_tenant(tLandlords* data, tTenant tenant)
-{
+void landlords_process_tenant(tLandlords* data, tTenant tenant) {
     int idx;
 
     // Check input data (Pre-conditions)
-    assert(data != NULL);
-
+    assert(data != NULL);    
+    
     // Check if an entry with this data already exists
     idx = landlords_find_by_cadastral_ref(*data, tenant.cadastral_ref);
-
+    
     // If it does not exist, create a new entry
-    if(idx >= 0) {
+    if (idx >= 0) {
         int months_rented = tenant.end_date.month - tenant.start_date.month + 1;
         float tax_factor;
         float amount_to_add;
-        if(tenant.age <= 35)
+        if (tenant.age <= 35)
             tax_factor = 0.1;
-        else
+        else 
             tax_factor = 0.2;
         amount_to_add = months_rented * tenant.rent * tax_factor - AMOUNT_NO_RENT * months_rented;
         data->elems[idx].tax = data->elems[idx].tax + amount_to_add;
     }
 }
 
+
 // Get a property
-void property_get(tLandlord data, int index, char* buffer)
-{
+void property_get(tLandlord data, int index, char* buffer) { 
     assert(index < data.properties.count);
-    sprintf(buffer, "%s;%s,%d;%s", data.properties.elems[index].cadastral_ref,
-        data.properties.elems[index].address.street, data.properties.elems[index].address.number,
-        data.properties.elems[index].landlord_id);
+    sprintf(buffer, "%s;%s,%d;%s", 
+        data.properties.elems[index].cadastral_ref,
+        data.properties.elems[index].address.street,
+        data.properties.elems[index].address.number,
+        data.properties.elems[index].landlord_id     
+    );
 }
 
 // Parse input from CSVEntry
-void property_parse(tProperty* data, tCSVEntry entry)
-{
+void property_parse(tProperty* data, tCSVEntry entry) {
     // Check input data (Pre-conditions)
-    assert(data != NULL);
+    assert(data != NULL);    
     assert(csv_numFields(entry) == NUM_FIELDS_PROPERTY);
-
+    
     // Get the date and time
-    csv_getAsString(entry, 0, data->cadastral_ref, MAX_CADASTRAL_REF + 1);
-    csv_getAsString(entry, 1, data->address.street, MAX_STREET + 1);
+    csv_getAsString(entry, 0, data->cadastral_ref, MAX_CADASTRAL_REF + 1);    
+    csv_getAsString(entry, 1, data->address.street, MAX_STREET + 1);    
     data->address.number = csv_getAsInteger(entry, 2);
-    csv_getAsString(entry, 3, data->landlord_id, MAX_PERSON_ID + 1);
+    csv_getAsString(entry, 3, data->landlord_id, MAX_PERSON_ID + 1);    
 }
 
 ////////////////////////////////////////
 
 // Add a new property
-void landlord_add_property(tLandlords* data, tProperty property)
-{
+void landlord_add_property(tLandlords* data, tProperty property) {
     int idx_landlord;
 
     // Check input data (Pre-conditions)
-    assert(data != NULL);
-
+    assert(data != NULL);    
+    
     idx_landlord = landlords_find(*data, property.landlord_id);
-    if(idx_landlord >= 0) {
+    if (idx_landlord >= 0) {
         int idx_property = -1;
 
         // Check if an entry with this data already exists
         idx_property = properties_find(data->elems[idx_landlord].properties, property.cadastral_ref);
-
+        
         // If it does not exist, create a new entry
-        if(idx_property < 0) {
+        if (idx_property < 0) {
             int property_count = data->elems[idx_landlord].properties.count;
             assert(property_count < MAX_PROPERTIES);
             property_cpy(&(data->elems[idx_landlord].properties.elems[property_count]), property);
             data->elems[idx_landlord].properties.count++;
-            data->elems[idx_landlord].tax = data->elems[idx_landlord].tax + AMOUNT_NO_RENT * 12;
+            data->elems[idx_landlord].tax = data->elems[idx_landlord].tax + AMOUNT_NO_RENT*12;
         }
     }
 }
 
 // Get a landlord
-void landlord_get(tLandlords data, int index, char* buffer)
-{
+void landlord_get(tLandlords data, int index, char* buffer) {
     assert(index < data.count);
-    sprintf(buffer, "%s;%s;%.1f", data.elems[index].name, data.elems[index].id, data.elems[index].tax);
+    sprintf(buffer, "%s;%s;%.1f", 
+        data.elems[index].name,
+        data.elems[index].id,
+        data.elems[index].tax
+    );
 }
 
 // Initialize a landlord
-void landlord_init(tLandlord* data)
-{
+void landlord_init(tLandlord* data) {
     // Check input data (Pre-conditions)
-    assert(data != NULL);
-
+    assert(data != NULL);    
+    
     data->name = NULL;
 }
 
 // Parse input from CSVEntry
-void landlord_parse(tLandlord* data, tCSVEntry entry)
-{
+void landlord_parse(tLandlord* data, tCSVEntry entry) {
     // Check input data (Pre-conditions)
-    assert(data != NULL);
+    assert(data != NULL);    
     assert(csv_numFields(entry) == NUM_FIELDS_LANDLORD);
     data->properties.count = 0;
-
-    data->name = (char*)malloc((strlen(entry.fields[0]) + 1) * sizeof(char));
+    
+    data->name = (char*) malloc((strlen(entry.fields[0]) + 1) * sizeof(char));
     assert(data->name != NULL);
     memset(data->name, 0, (strlen(entry.fields[0]) + 1) * sizeof(char));
-    csv_getAsString(entry, 0, data->name, strlen(entry.fields[0]) + 1);
-
-    csv_getAsString(entry, 1, data->id, MAX_PERSON_ID + 1);
-
+    csv_getAsString(entry, 0, data->name, strlen(entry.fields[0]) + 1);    
+    
+    csv_getAsString(entry, 1, data->id, MAX_PERSON_ID + 1);    
+    
     data->tax = csv_getAsInteger(entry, 2);
-
+    
     // Initialize the properties
     properties_init(&(data->properties));
 }
 
 // Release a landlord
-void landlord_free(tLandlord* data)
-{
+void landlord_free(tLandlord* data) {
     // Check input data (Pre-conditions)
-    assert(data != NULL);
-
+    assert(data != NULL);   
+    
     // Release the name
-    if(data->name != NULL) {
+    if (data->name != NULL) {
         free(data->name);
     }
     data->name = NULL;
@@ -188,85 +184,82 @@ void landlord_free(tLandlord* data)
 ////////////////////////////////////////
 
 // Add a new landlord
-void landlords_add(tLandlords* data, tLandlord landlord)
-{
+void landlords_add(tLandlords* data, tLandlord landlord) {
     int idx;
 
     // Check input data (Pre-conditions)
-    assert(data != NULL);
-
+    assert(data != NULL);    
+    
     // Check if an entry with this data already exists
     idx = landlords_find(*data, landlord.id);
-
+    
     // If it does not exist, create a new entry
-    if(idx < 0) {
-        if(data->elems == NULL) {
-            data->elems = (tLandlord*)malloc(sizeof(tLandlord));
+    if (idx < 0) {
+        if (data->elems == NULL) {
+            data->elems = (tLandlord*) malloc(sizeof(tLandlord));
         } else {
-            data->elems = (tLandlord*)realloc(data->elems, (data->count + 1) * sizeof(tLandlord));
+            data->elems = (tLandlord*) realloc(data->elems, (data->count + 1) * sizeof(tLandlord));
         }
         assert(data->elems != NULL);
-        /////////////////////////////////
+        /////////////////////////////////  
         landlord_init(&(data->elems[data->count]));
         landlord_cpy(&(data->elems[data->count]), landlord);
-        data->count++;
+        data->count++;        
     }
 }
 
 // Remove a landlord
-void landlords_del(tLandlords* data, char* id)
+void landlords_del(tLandlords* data, char* id) 
 {
     int idx;
     int i;
-
+    
     // Check if an entry with this data already exists
     idx = landlords_find(*data, id);
-
-    if(idx >= 0) {
+    
+    if (idx >= 0) {
         // Shift elements to remove selected
-        for(i = idx; i < data->count - 1; i++) {
-            // Copy element on position i+1 to position i
-            landlord_cpy(&(data->elems[i]), data->elems[i + 1]);
+        for(i = idx; i < data->count-1; i++) {
+                // Copy element on position i+1 to position i
+                landlord_cpy(&(data->elems[i]), data->elems[i+1]);
         }
         // Update the number of elements
-        data->count--;
+        data->count--;  
         /////////////////////////////////
-        if(data->count > 0) {
-            data->elems = (tLandlord*)realloc(data->elems, data->count * sizeof(tLandlord));
+        if (data->count > 0) {
+            data->elems = (tLandlord*) realloc(data->elems, data->count * sizeof(tLandlord));
             assert(data->elems != NULL);
         } else {
-            landlords_free(data);
+			landlords_free(data);
         }
-        /////////////////////////////////
+        /////////////////////////////////   
     }
 }
 
-// returns true if field tax of expected[index] is greater than the one in
-// declarant[index]
-bool mismatch_tax_declaration(tLandlords expected, tLandlords declarant, int index)
-{
+// returns true if field tax of expected[index] is greater than the one in declarant[index]
+bool mismatch_tax_declaration(tLandlords expected, tLandlords declarant, int index) {
     return (expected.elems[index].tax > declarant.elems[index].tax);
 }
 
 // Copy the data from the source to destination
-void landlords_cpy(tLandlords* destination, tLandlords source)
-{
+void landlords_cpy(tLandlords* destination, tLandlords source) {
     int i;
     destination->count = source.count;
-    destination->elems = (tLandlord*)malloc(source.count * sizeof(tLandlord));
-
-    for(i = 0; i < landlords_len(source); i++) {
+	destination->elems = (tLandlord*) malloc(source.count * sizeof(tLandlord));
+	
+    for(i = 0 ; i < landlords_len(source) ; i++) {
         landlord_cpy(&(destination->elems[i]), source.elems[i]);
-        // we want to copy all fields from source.elems[i] but want
+        // we want to copy all fields from source.elems[i] but want 
         // to set tax to 0 in the expected landlords
         destination->elems[i].tax = 0.0;
-    }
+    }    
 }
 
-// returns a pointer the address of the cadastral_ref
-tAddress* findAddressByCadastralRef(tLandlords* data, char* cadastral_ref)
-{
-    // PR3 2a
+
+//returns a pointer the address of the cadastral_ref
+tAddress* findAddressByCadastralRef(tLandlords* data, char* cadastral_ref) {
+    /*PR3 2a*/
+    //FIN PROPERTIES FIRST, EXTRACT CADASTRAL REF AND COMPARE WITH LANDLORDS//
     for(int i = 0; i < data->count; i++) {
         for(int j = 0; j < data->elems[i].properties.count; j++) {
             if(strcmp(data->elems[i].properties.elems[j].cadastral_ref, cadastral_ref) == 0) {
@@ -274,63 +267,58 @@ tAddress* findAddressByCadastralRef(tLandlords* data, char* cadastral_ref)
             }
         }
     }
-
     return NULL;
 }
 
-// sorts properties using QuickSort method, alphanumeric sort from lower to
-// higher
-void sortPropertiesByCadastralRef_QuickSort(tProperties* data)
-{
-    // PR3 2b
-
+// sorts properties using QuickSort method, alphanumeric sort from lower to higher
+void sortPropertiesByCadastralRef_QuickSort(tProperties* data){
+    /*PR3 2b*/
+    //CALL TO FUNCTION QUICKSORT //
     quickSortProperties(data->elems, 0, data->count - 1);
 }
 
 // sorts lanlords using QuickSort method, alphanumeric sort from lower to higher
-void sortLandlordsByName_QuickSort(tLandlords* data)
-{
-    // PR3 2c
+void sortLandlordsByName_QuickSort(tLandlords* data) {
+    /*PR3 2c*/
 
-    // Ordenar los propietarios por nombre
+    //SORT LANDLORDS BY NAME //
     quickSortLandlords(data->elems, 0, data->count - 1);
 
-    // Ordenar las propiedades de cada propietario por referencia catastral
+    //SORT PROPERTIES BY CADASTRAL REF//
     for(int i = 0; i < data->count; i++) {
         quickSortProperties(data->elems[i].properties.elems, 0, data->elems[i].properties.count - 1);
     }
 }
 
-// [AUX METHOD] Return the position of a tenant entry with provided information.
-// -1 if it does not exist
-int landlords_find(tLandlords data, const char* id)
-{
+
+// [AUX METHOD] Return the position of a tenant entry with provided information. -1 if it does not exist
+int landlords_find(tLandlords data, const char* id) {
     int i;
     int res = -1;
 
     i = 0;
-    while((i < data.count) && (res < 0)) {
+    while ((i < data.count) && (res < 0)) {
         if((strcmp(data.elems[i].id, id) == 0)) {
             res = i;
-        } else {
-            i++;
         }
+        else {
+            i++;
+        } 
     }
-
+    
     return res;
 }
 
-// [AUX METHOD] Return the position of a tenant entry with provided information.
-// -1 if it does not exist
-int landlords_find_by_cadastral_ref(tLandlords data, const char* id)
-{
+
+// [AUX METHOD] Return the position of a tenant entry with provided information. -1 if it does not exist
+int landlords_find_by_cadastral_ref(tLandlords data, const char* id) {
     int i, j;
     int res = -1;
 
     i = 0;
-    while((i < data.count) && (res < 0)) {
+    while ((i < data.count) && (res < 0)) {
         j = 0;
-        while((j < data.elems[i].properties.count) && (res < 0)) {
+        while ((j < data.elems[i].properties.count) && (res < 0)) {
             if((strcmp(data.elems[i].properties.elems[j].cadastral_ref, id) == 0)) {
                 res = i;
             }
@@ -338,102 +326,97 @@ int landlords_find_by_cadastral_ref(tLandlords data, const char* id)
         }
         i++;
     }
-
+    
     return res;
 }
 
-// [AUX METHODS] Copy the data from the source to destination
-void landlord_cpy(tLandlord* destination, tLandlord source)
-{
 
+// [AUX METHODS] Copy the data from the source to destination
+void landlord_cpy(tLandlord* destination, tLandlord source) {
+    
     if(destination->name != NULL) {
         free(destination->name);
     }
-    destination->name = (char*)malloc(sizeof(char) * (strlen(source.name) + 1));
+    destination->name = (char*) malloc(sizeof(char) * (strlen(source.name) + 1));
     assert(destination->name != NULL);
     strcpy(destination->name, source.name);
-
+    
     strcpy(destination->id, source.id);
     destination->tax = source.tax;
-
+    
     properties_cpy(&(destination->properties), source.properties);
 }
 
 // [AUX METHODS] Copy the properties from sources to destination
-void properties_cpy(tProperties* destination, tProperties source)
-{
+void properties_cpy(tProperties *destination, tProperties source) {
     int i;
-
-    for(i = 0; i < source.count; i++) {
+    
+    for (i = 0; i < source.count; i++) {
         property_cpy(&(destination->elems[i]), source.elems[i]);
     }
-
+    
     destination->count = source.count;
 }
 
-// [AUX METHOD] Return the position of a property entry with provided
-// information. -1 if it does not exist
-int properties_find(tProperties data, const char* cadastral_ref)
-{
+// [AUX METHOD] Return the position of a property entry with provided information. -1 if it does not exist
+int properties_find(tProperties data, const char* cadastral_ref) {
     int i;
     int res = -1;
 
     i = 0;
-    while((i < data.count) && (res < 0)) {
+    while ((i < data.count) && (res < 0)) {
         if((strcmp(data.elems[i].cadastral_ref, cadastral_ref) == 0)) {
             res = i;
-        } else {
-            i++;
         }
+        else {
+            i++;
+        } 
     }
     return res;
 }
 
 // [AUX METHODS] Copy the data from the source to destination
-void property_cpy(tProperty* destination, tProperty source)
-{
+void property_cpy(tProperty* destination, tProperty source) {
     strcpy(destination->cadastral_ref, source.cadastral_ref);
     strcpy(destination->address.street, source.address.street);
     destination->address.number = source.address.number;
     strcpy(destination->landlord_id, source.landlord_id);
 }
 
-// Remove all elements
-void landlords_free(tLandlords* data)
-{
+// Remove all elements 
+void landlords_free(tLandlords* data) { 
     /////////////////////////////////
-    if(data->elems != NULL) {
-        for(int i = 0; i < landlords_len(*data); i++) {
-            landlord_free(&(data->elems[i]));
-        }
-
-        free(data->elems);
+    if (data->elems != NULL) {
+        for(int i = 0 ; i < landlords_len(*data) ; i++) {
+        landlord_free(&(data->elems[i]));
+    }  
+        
+    free(data->elems);
     }
     landlords_init(data);
-    /////////////////////////////////
+    /////////////////////////////////    
 }
 
-void quickSortProperties(tProperty* properties, int low, int high)
-{
+
+void quickSortProperties(tProperty* properties, int low, int high) {
     if(low < high) {
-        // Encontrar el índice de partición
+        //INDEX FIN PROCEDURE//
         int pi = partitionQuickSortProperties(properties, low, high);
 
-        // Ordenar recursivamente las dos mitades
+        //GIVEN TWO PARTITIONS ORDER THEM//
         quickSortProperties(properties, low, pi - 1);
         quickSortProperties(properties, pi + 1, high);
     }
 }
 
-int partitionQuickSortProperties(tProperty* properties, int low, int high)
-{
+int partitionQuickSortProperties(tProperty* properties, int low, int high) {
     char* pivot = properties[high].cadastral_ref;
-    // Índice del elemento más pequeño
+    
+    //LOWEST INDEX//
     int i = low - 1;
 
     for(int j = low; j < high; j++) {
-        // Si el elemento actual es menor que el pivote, lo movemos al lado
-        // izquierdo
+        // IF ACTUAL < PIVOT, MOVE IT TO THE LEFT POSSITION//
         if(strcmp(properties[j].cadastral_ref, pivot) < 0) {
             i++;
             tProperty temp = properties[i];
@@ -442,7 +425,7 @@ int partitionQuickSortProperties(tProperty* properties, int low, int high)
         }
     }
 
-    // Colocar el pivote en su lugar correcto
+    //PUT PIVOT IN PLACE//
     tProperty temp = properties[i + 1];
     properties[i + 1] = properties[high];
     properties[high] = temp;
@@ -450,41 +433,40 @@ int partitionQuickSortProperties(tProperty* properties, int low, int high)
     return i + 1;
 }
 
-int partitionLandlords(tLandlord* landlords, int low, int high)
-{
-    // Usamos el último propietario como pivote
+int partitionLandlords(tLandlord* landlords, int low, int high) {
+    //LAST`PROPERTY AS PIVOT//
     char* pivot = landlords[high].name;
 
-    // Índice del elemento más pequeño
+    //INDEX AS LOWEST//
     int i = low - 1;
 
-    // Recorrer los elementos del arreglo de propietarios
+    //ITERATE THROUGH LANDLORDS ELEMS//
     for(int j = low; j < high; j++) {
-        // Si el nombre del propietario actual es menor que el pivote
+        //IF NAME < PIVOT//
         if(strcmp(landlords[j].name, pivot) < 0) {
             i++;
-            // Intercambiar landlords[i] y landlords[j]
+            //SWAP LANDLORDS[i] WITH LANLORDS[j]
             tLandlord temp = landlords[i];
             landlords[i] = landlords[j];
             landlords[j] = temp;
         }
     }
 
-    // Colocar el pivote en su lugar correcto
+    //SET PIVOT IN PLACE//
     tLandlord temp = landlords[i + 1];
     landlords[i + 1] = landlords[high];
     landlords[high] = temp;
 
-    return i + 1; // Devolver el índice del pivote
+    //RETURN PIVOT INDEX//
+    return i + 1;
 }
 
-void quickSortLandlords(tLandlord* landlords, int low, int high)
-{
+void quickSortLandlords(tLandlord* landlords, int low, int high) {
     if(low < high) {
-        // Encontrar el índice de partición
+        //FIND PARTITION INDEX//
         int pi = partitionLandlords(landlords, low, high);
 
-        // Ordenar recursivamente las dos mitades
+        //RECURSIVELY REORDER BOTH LISTS//
         quickSortLandlords(landlords, low, pi - 1);
         quickSortLandlords(landlords, pi + 1, high);
     }

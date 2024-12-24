@@ -29,14 +29,14 @@ typedef struct _tProperties {
 } tProperties;
 
 typedef struct _tLandlord {
-    char* name;
+    char *name;
     char id[MAX_PERSON_ID + 1];
     float tax;
     tProperties properties;
 } tLandlord;
 
 typedef struct _tLandlords {
-    tLandlord* elems;
+    tLandlord *elems;
     int count;
 } tLandlords;
 
@@ -70,7 +70,7 @@ void landlord_free(tLandlord* data);
 // Add a new tenant
 void landlords_add(tLandlords* data, tLandlord tenant);
 
-// Remove a landlord
+//Remove a landlord
 void landlords_del(tLandlords* data, char* id);
 
 // Remove all elements
@@ -94,15 +94,13 @@ void landlord_get(tLandlords data, int index, char* buffer);
 // Get a property data in a string
 void property_get(tLandlord data, int index, char* buffer);
 
-// returns true if field tax of expected[index] is greater than the one in
-// declarant[index]
+// returns true if field tax of expected[index] is greater than the one in declarant[index]
 bool mismatch_tax_declaration(tLandlords expected, tLandlords declarant, int index);
 
 // returns a pointer to the address of the cadastral_ref
 tAddress* findAddressByCadastralRef(tLandlords* data, char* cadastral_ref);
 
-// sorts properties using QuickSort method, alphanumeric sort from lower to
-// higher
+// sorts properties using QuickSort method, alphanumeric sort from lower to higher
 void sortPropertiesByCadastralRef_QuickSort(tProperties* data);
 
 // sorts lanlords using QuickSort method, alphanumeric sort from lower to higher
@@ -112,26 +110,25 @@ void sortLandlordsByName_QuickSort(tLandlords* data);
 // Aux methods
 /////////////////////////////////////
 
-// [AUX METHOD] Return the position of a property entry with provided
-// information. -1 if it does not exist
+// [AUX METHOD] Return the position of a property entry with provided information. -1 if it does not exist
 int properties_find(tProperties data, const char* cadastral_ref);
 
 // [AUX METHODS] Copy the data from the source to destination
 void property_cpy(tProperty* destination, tProperty source);
 
-// [AUX METHODS] returns the position of a landlord that has a property with
-// that cadastral ref
+// [AUX METHODS] returns the position of a landlord that has a property with that cadastral ref
 int landlords_find_by_cadastral_ref(tLandlords data, const char* cadastral_ref);
 
-// [AUX METHOD] Return the position of a landl entry with that landlord id. -1
-// if it does not exist
+// [AUX METHOD] Return the position of a landl entry with that landlord id. -1 if it does not exist
 int landlords_find(tLandlords data, const char* landlord_id);
 
 // [AUX METHODS] Copy the data from the source to destination
 void landlord_cpy(tLandlord* destination, tLandlord source);
 
 // [AUX METHODS] Copy the properties from sources to destination
-void properties_cpy(tProperties* destination, tProperties source);
+void properties_cpy(tProperties *destination, tProperties source);
+
+//////////////////////////////////////////// AUX PRA3-2
 
 void quickSortProperties(tProperty* properties, int low, int high);
 
@@ -140,6 +137,8 @@ int partitionQuickSortProperties(tProperty* properties, int low, int high);
 int partitionLandlords(tLandlord* landlords, int low, int high);
 
 void quickSortLandlords(tLandlord* landlords, int low, int high);
+
 ////////////////////////////////////////////
 
 #endif
+

@@ -6,15 +6,15 @@
 ProjectName            :=UOC20241
 ConfigurationName      :=Debug
 WorkspaceConfiguration :=Debug
-WorkspacePath          :=/home/uoc/Desktop/UOC20241
-ProjectPath            :=/home/uoc/Desktop/UOC20241
+WorkspacePath          :=/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241
+ProjectPath            :=/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241
 IntermediateDirectory  :=build-$(ConfigurationName)
 OutDir                 :=$(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=uoc
-Date                   :=23/12/24
+Date                   :=24/12/24
 CodeLitePath           :=/home/uoc/.codelite
 MakeDirCommand         :=mkdir -p
 LinkerName             :=/usr/bin/g++
@@ -62,7 +62,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/test_src_test.c$(ObjectSuffix) $(IntermediateDirectory)/test_src_test_suite.c$(ObjectSuffix) $(IntermediateDirectory)/test_src_test_pr1.c$(ObjectSuffix) $(IntermediateDirectory)/test_src_test_pr2.c$(ObjectSuffix) $(IntermediateDirectory)/test_src_test_pr3.c$(ObjectSuffix) $(IntermediateDirectory)/src_main.c$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/test_src_test.c$(ObjectSuffix) $(IntermediateDirectory)/test_src_test_pr1.c$(ObjectSuffix) $(IntermediateDirectory)/test_src_test_suite.c$(ObjectSuffix) $(IntermediateDirectory)/test_src_test_pr2.c$(ObjectSuffix) $(IntermediateDirectory)/test_src_test_pr3.c$(ObjectSuffix) $(IntermediateDirectory)/src_main.c$(ObjectSuffix) 
 
 
 
@@ -94,31 +94,31 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/test_src_test.c$(ObjectSuffix): test/src/test.c $(IntermediateDirectory)/test_src_test.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/uoc/Desktop/UOC20241/test/src/test.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/test_src_test.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/test/src/test.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/test_src_test.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/test_src_test.c$(DependSuffix): test/src/test.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/test_src_test.c$(ObjectSuffix) -MF$(IntermediateDirectory)/test_src_test.c$(DependSuffix) -MM test/src/test.c
 
 $(IntermediateDirectory)/test_src_test.c$(PreprocessSuffix): test/src/test.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/test_src_test.c$(PreprocessSuffix) test/src/test.c
 
-$(IntermediateDirectory)/test_src_test_suite.c$(ObjectSuffix): test/src/test_suite.c $(IntermediateDirectory)/test_src_test_suite.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/uoc/Desktop/UOC20241/test/src/test_suite.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/test_src_test_suite.c$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/test_src_test_suite.c$(DependSuffix): test/src/test_suite.c
-	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/test_src_test_suite.c$(ObjectSuffix) -MF$(IntermediateDirectory)/test_src_test_suite.c$(DependSuffix) -MM test/src/test_suite.c
-
-$(IntermediateDirectory)/test_src_test_suite.c$(PreprocessSuffix): test/src/test_suite.c
-	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/test_src_test_suite.c$(PreprocessSuffix) test/src/test_suite.c
-
 $(IntermediateDirectory)/test_src_test_pr1.c$(ObjectSuffix): test/src/test_pr1.c $(IntermediateDirectory)/test_src_test_pr1.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/uoc/Desktop/UOC20241/test/src/test_pr1.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/test_src_test_pr1.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/test/src/test_pr1.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/test_src_test_pr1.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/test_src_test_pr1.c$(DependSuffix): test/src/test_pr1.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/test_src_test_pr1.c$(ObjectSuffix) -MF$(IntermediateDirectory)/test_src_test_pr1.c$(DependSuffix) -MM test/src/test_pr1.c
 
 $(IntermediateDirectory)/test_src_test_pr1.c$(PreprocessSuffix): test/src/test_pr1.c
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/test_src_test_pr1.c$(PreprocessSuffix) test/src/test_pr1.c
 
+$(IntermediateDirectory)/test_src_test_suite.c$(ObjectSuffix): test/src/test_suite.c $(IntermediateDirectory)/test_src_test_suite.c$(DependSuffix)
+	$(CC) $(SourceSwitch) "/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/test/src/test_suite.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/test_src_test_suite.c$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/test_src_test_suite.c$(DependSuffix): test/src/test_suite.c
+	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/test_src_test_suite.c$(ObjectSuffix) -MF$(IntermediateDirectory)/test_src_test_suite.c$(DependSuffix) -MM test/src/test_suite.c
+
+$(IntermediateDirectory)/test_src_test_suite.c$(PreprocessSuffix): test/src/test_suite.c
+	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/test_src_test_suite.c$(PreprocessSuffix) test/src/test_suite.c
+
 $(IntermediateDirectory)/test_src_test_pr2.c$(ObjectSuffix): test/src/test_pr2.c $(IntermediateDirectory)/test_src_test_pr2.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/uoc/Desktop/UOC20241/test/src/test_pr2.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/test_src_test_pr2.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/test/src/test_pr2.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/test_src_test_pr2.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/test_src_test_pr2.c$(DependSuffix): test/src/test_pr2.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/test_src_test_pr2.c$(ObjectSuffix) -MF$(IntermediateDirectory)/test_src_test_pr2.c$(DependSuffix) -MM test/src/test_pr2.c
 
@@ -126,7 +126,7 @@ $(IntermediateDirectory)/test_src_test_pr2.c$(PreprocessSuffix): test/src/test_p
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/test_src_test_pr2.c$(PreprocessSuffix) test/src/test_pr2.c
 
 $(IntermediateDirectory)/test_src_test_pr3.c$(ObjectSuffix): test/src/test_pr3.c $(IntermediateDirectory)/test_src_test_pr3.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/uoc/Desktop/UOC20241/test/src/test_pr3.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/test_src_test_pr3.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/test/src/test_pr3.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/test_src_test_pr3.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/test_src_test_pr3.c$(DependSuffix): test/src/test_pr3.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/test_src_test_pr3.c$(ObjectSuffix) -MF$(IntermediateDirectory)/test_src_test_pr3.c$(DependSuffix) -MM test/src/test_pr3.c
 
@@ -134,7 +134,7 @@ $(IntermediateDirectory)/test_src_test_pr3.c$(PreprocessSuffix): test/src/test_p
 	$(CC) $(CFLAGS) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/test_src_test_pr3.c$(PreprocessSuffix) test/src/test_pr3.c
 
 $(IntermediateDirectory)/src_main.c$(ObjectSuffix): src/main.c $(IntermediateDirectory)/src_main.c$(DependSuffix)
-	$(CC) $(SourceSwitch) "/home/uoc/Desktop/UOC20241/src/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_main.c$(ObjectSuffix) $(IncludePath)
+	$(CC) $(SourceSwitch) "/home/uoc/Desktop/sf_PP/PP--PRA3-main/UOC20241/src/main.c" $(CFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_main.c$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/src_main.c$(DependSuffix): src/main.c
 	@$(CC) $(CFLAGS) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_main.c$(ObjectSuffix) -MF$(IntermediateDirectory)/src_main.c$(DependSuffix) -MM src/main.c
 
